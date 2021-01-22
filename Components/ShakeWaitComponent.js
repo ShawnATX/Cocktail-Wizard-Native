@@ -6,7 +6,7 @@ const ShakeWait = () => {
   return (
     <Image
       source={ShakerImage}
-      style={{ width: 350, height: 450 }}
+      style={{ width: "85%", height: "85%", resizeMode: "contain" }}
       //   className="shakeSlow shake-constant responsive-img"
     />
   );

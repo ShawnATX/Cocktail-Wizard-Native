@@ -1,6 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
+import { Provider as PaperProvider } from "react-native-paper";
 import DrinkCard from "./Components/DrinkCardComponent";
 import ShakeWait from "./Components/ShakeWaitComponent";
 
@@ -9,15 +10,15 @@ export default function App() {
   const [drinkState, setDrinkState] = useState({
     drinkName: "",
     id: 0,
-    //ingredients array is doublets with ingredient and measurement
+    //ingredients array contains objects with ingredient and measurement props
     ingredients: [],
     instructions: "",
     image: "",
+    glass: "",
   });
 
   let randomCocktailURL =
     "https://www.thecocktaildb.com/api/json/v1/1/random.php?api-key=1";
-  //let searchCocktailURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?api-key=1&s=";
 
   useEffect(() => {
     getRandomDrink();
@@ -40,6 +41,7 @@ export default function App() {
           strDrink: drinkName,
           strInstructions: instructions,
           strDrinkThumb,
+          strGlass: glass,
         } = response.drinks[0];
         let ingredientArr = buildIngredientsArray(response.drinks[0]);
         setDrinkState({
@@ -48,6 +50,7 @@ export default function App() {
           ingredients: ingredientArr,
           instructions: instructions,
           image: strDrinkThumb,
+          glass: glass,
         });
       })
       .finally(() => setNotLoading());
@@ -62,31 +65,37 @@ export default function App() {
       if (drinkObj[ingredient] === null) {
         return ingredientsArr;
       }
-      ingredientsArr.push([drinkObj[ingredient], drinkObj[measurement]]);
+      ingredientsArr.push({
+        ingredient: drinkObj[ingredient],
+        measurement: drinkObj[measurement],
+      });
     }
   }
 
   return (
-    <View style={styles.container}>
-      {isLoading ? (
-        <ShakeWait />
-      ) : (
-        <DrinkCard
-          image={drinkState.image}
-          drinkName={drinkState.drinkName}
-          ingredients={drinkState.ingredients}
-          instructions={drinkState.instructions}
-        />
-        // <Image source={{uri: drinkState.image }} style={{ width: 350, height: 450 }}/>
-      )}
-      <StatusBar style="auto" />
-    </View>
+    <PaperProvider>
+      <View style={styles.container}>
+        {isLoading ? (
+          <ShakeWait />
+        ) : (
+          <DrinkCard
+            image={drinkState.image}
+            drinkName={drinkState.drinkName}
+            ingredients={drinkState.ingredients}
+            instructions={drinkState.instructions}
+            glass={drinkState.glass}
+          />
+        )}
+        <StatusBar style="auto" />
+      </View>
+    </PaperProvider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: "column",
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",

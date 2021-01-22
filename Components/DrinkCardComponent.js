@@ -1,68 +1,117 @@
-import React from "react";
-import { Text, ImageBackground, StyleSheet } from "react-native";
-// import DrinkVideo from "./drinkVideo";
+import React, { useState } from "react";
+import {
+  ImageBackground,
+  Image,
+  Platform,
+  Text,
+  View,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+} from "react-native";
+import { List, Paragraph, Title, Surface } from "react-native-paper";
 
 const DrinkCard = (props) => {
-  const { drinkName, id, ingredients, instructions, image } = props;
+  const { drinkName, id, ingredients, instructions, image, glass } = props;
+
+  const [expanded, setExpanded] = useState(false);
+
+  const handlePress = () => setExpanded(!expanded);
 
   function getIngredientList() {
-    const ingredientList = ingredients.map((ingredient) => (
-      <li key={ingredient[0]}>
-        {ingredient[0]} - {ingredient[1]}
-      </li>
+    const ingredientList = ingredients.map((ingredient, i) => (
+      <List.Item
+        key={i}
+        title={ingredient.ingredient}
+        description={ingredient.measurement}
+      />
     ));
     return ingredientList;
   }
 
   return (
-    <ImageBackground
-      source={{ uri: image }}
-      style={{ width: "100%", height: "100%" }}
-    >
-      <Text style={styles.heading}> {drinkName} </Text>
-    </ImageBackground>
-    // <div className="row card-row">
-    //   <div className="col s12 m12 l12 card-col">
-    //     <div className="card">
-    //       <div className="card-image waves-effect waves-light">
-    //         <img className="responsive-img" src={image} alt={drinkName} />
-    //         <h1 className="card-title">{drinkName}</h1>
-    //         <button
-    //           href=""
-    //           className="btn-large btn-floating halfway-fab waves-effect waves-light red"
-    //         >
-    //           <i className="large material-icons activator">video_library</i>
-    //         </button>
-    //       </div>
-    //       <div className="card-content">
-    //         {getIngredientList()}
-    //         <p className="flow-text">{instructions}</p>
-    //       </div>
-    //       <div className="card-reveal">
-    //         <span className="card-title grey-text text-darken-4">
-    //           {drinkName}
-    //           <i className="material-icons large right">close</i>
-    //         </span>
-    //         {drinkName ? <DrinkVideo name={drinkName} /> : <div></div>}
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
+    <SafeAreaView>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Title style={styles.heading}>{drinkName}</Title>
+        </View>
+        <Surface style={styles.surface}>
+          <Image
+            source={{ uri: image }}
+            style={{ width: "100%", height: "100%", resizeMode: "contain" }}
+          />
+        </Surface>
+        <View style={styles.center}>
+          <Paragraph style={styles.instructions}>{instructions}</Paragraph>
+        </View>
+      </View>
+      <List.Section style={styles.ingredientList}>
+        <List.Accordion
+          title="Ingredients"
+          expanded={expanded}
+          onPress={handlePress}
+        >
+          {getIngredientList()}
+        </List.Accordion>
+      </List.Section>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  background: {
+    width: "100%",
+    height: "100%",
+    resizeMode: "contain",
+  },
   container: {
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
   },
+  header: {
+    flexDirection: "column",
+    textAlign: "center",
+    justifyContent: "flex-start",
+    backgroundColor: "white",
+  },
   heading: {
+    textAlign: "center",
+    justifyContent: "center",
+    color: "black",
+    fontWeight: "bold",
+    fontSize: 40,
+    textShadowColor: "grey",
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : "0",
+  },
+  center: {
+    paddingTop: 5,
+    flex: 1,
+    justifyContent: "flex-end",
+    flexDirection: "column-reverse",
+  },
+  surface: {
+    padding: 6,
+    height: 350,
+    width: 350,
     alignItems: "center",
     justifyContent: "center",
-    color: "white",
+    elevation: 4,
+  },
+  instructions: {
+    paddingTop: 8,
+    justifyContent: "flex-end",
     flex: 1,
+    fontSize: 24,
+    color: "black",
+  },
+  ingredientList: {
+    backgroundColor: "#fff",
+  },
+  footer: {
+    flex: 1,
+    flexDirection: "column-reverse",
   },
 });
 
