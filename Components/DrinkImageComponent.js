@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     elevation: 6,
+    paddingBottom: 4,
   },
 });
 

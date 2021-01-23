@@ -61,45 +61,42 @@ const DrinkCard = (props) => {
           <Paragraph style={styles.instructions}>{instructions}</Paragraph>
         </Modal>
       </Portal>
-      <SafeAreaView>
-        <View style={styles.container}>
-          <View style={styles.header}>
-            <Title style={styles.heading}>{drinkName}</Title>
-          </View>
-          <FlingGestureHandler
-            direction={Directions.RIGHT | Directions.LEFT}
-            numberOfPointers={1}
-            onHandlerStateChange={({ nativeEvent }) => {
-              if (nativeEvent.state === State.ACTIVE) {
-                console.log("Fling!");
-                getDrink();
-              }
-            }}
-          >
-            <View>
-              <DrinkImage image={{ image }} getDrink={getDrink} />
-            </View>
-          </FlingGestureHandler>
-          <Button
-            icon="comment-text"
-            mode="outlined"
-            onPress={showModal}
-            style={styles.button}
-            contentStyle={styles.buttonInner}
-          >
-            Instructions
-          </Button>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.header}>
+          <Title style={styles.heading}>{drinkName}</Title>
         </View>
-        <List.Section style={styles.ingredientList}>
-          <List.Accordion
-            title="Ingredients"
-            expanded={expanded}
-            onPress={handlePress}
-          >
-            {getIngredientList()}
-          </List.Accordion>
-        </List.Section>
+        <FlingGestureHandler
+          direction={Directions.RIGHT | Directions.LEFT}
+          numberOfPointers={1}
+          onHandlerStateChange={({ nativeEvent }) => {
+            if (nativeEvent.state === State.ACTIVE) {
+              getDrink();
+            }
+          }}
+        >
+          <View>
+            <DrinkImage image={{ image }} getDrink={getDrink} />
+          </View>
+        </FlingGestureHandler>
+        <Button
+          icon="comment-text"
+          mode="outlined"
+          onPress={showModal}
+          style={styles.button}
+          contentStyle={styles.buttonInner}
+        >
+          Instructions
+        </Button>
       </SafeAreaView>
+      <List.Section style={styles.ingredientList}>
+        <List.Accordion
+          title="Ingredients"
+          expanded={expanded}
+          onPress={handlePress}
+        >
+          {getIngredientList()}
+        </List.Accordion>
+      </List.Section>
     </Provider>
   );
 };
@@ -116,6 +113,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     justifyContent: "flex-start",
     backgroundColor: "white",
+    paddingTop: Platform.OS === "android" ? 0 : 6,
   },
   heading: {
     textAlign: "center",
@@ -124,8 +122,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 40,
     textShadowColor: "grey",
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : "2",
-    paddingBottom: 3,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 10,
+    paddingBottom: 5,
   },
   center: {
     paddingTop: 5,
@@ -155,6 +153,7 @@ const styles = StyleSheet.create({
     flexDirection: "column-reverse",
   },
   button: {
+    paddingTop: 4,
     justifyContent: "flex-end",
   },
   buttonInner: {
