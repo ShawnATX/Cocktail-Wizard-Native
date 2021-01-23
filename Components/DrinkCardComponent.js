@@ -1,22 +1,43 @@
 import React, { useState } from "react";
 import {
-  ImageBackground,
+  Alert,
   Image,
   Platform,
-  Text,
   View,
   SafeAreaView,
   StatusBar,
   StyleSheet,
 } from "react-native";
-import { List, Paragraph, Title, Surface } from "react-native-paper";
+import {
+  List,
+  Paragraph,
+  Title,
+  Surface,
+  Modal,
+  Text,
+  Portal,
+  Button,
+  Provider,
+} from "react-native-paper";
+import {
+  FlingGestureHandler,
+  Directions,
+  State,
+} from "react-native-gesture-handler";
+import DrinkImage from "./DrinkImageComponent";
 
 const DrinkCard = (props) => {
   const { drinkName, id, ingredients, instructions, image, glass } = props;
 
-  const [expanded, setExpanded] = useState(false);
+  const { getDrink } = props;
 
+  const [expanded, setExpanded] = useState(false);
   const handlePress = () => setExpanded(!expanded);
+
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const showModal = () => setModalVisible(true);
+  const hideModal = () => setModalVisible(false);
 
   function getIngredientList() {
     const ingredientList = ingredients.map((ingredient, i) => (
@@ -30,45 +51,65 @@ const DrinkCard = (props) => {
   }
 
   return (
-    <SafeAreaView>
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Title style={styles.heading}>{drinkName}</Title>
-        </View>
-        <Surface style={styles.surface}>
-          <Image
-            source={{ uri: image }}
-            style={{ width: "100%", height: "100%", resizeMode: "contain" }}
-          />
-        </Surface>
-        <View style={styles.center}>
-          <Paragraph style={styles.instructions}>{instructions}</Paragraph>
-        </View>
-      </View>
-      <List.Section style={styles.ingredientList}>
-        <List.Accordion
-          title="Ingredients"
-          expanded={expanded}
-          onPress={handlePress}
+    <Provider>
+      <Portal>
+        <Modal
+          visible={modalVisible}
+          onDismiss={hideModal}
+          contentContainerStyle={styles.instructions}
         >
-          {getIngredientList()}
-        </List.Accordion>
-      </List.Section>
-    </SafeAreaView>
+          <Paragraph style={styles.instructions}>{instructions}</Paragraph>
+        </Modal>
+      </Portal>
+      <SafeAreaView>
+        <View style={styles.container}>
+          <View style={styles.header}>
+            <Title style={styles.heading}>{drinkName}</Title>
+          </View>
+          <FlingGestureHandler
+            direction={Directions.RIGHT | Directions.LEFT}
+            numberOfPointers={1}
+            onHandlerStateChange={({ nativeEvent }) => {
+              if (nativeEvent.state === State.ACTIVE) {
+                console.log("Fling!");
+                getDrink();
+              }
+            }}
+          >
+            <View>
+              <DrinkImage image={{ image }} getDrink={getDrink} />
+            </View>
+          </FlingGestureHandler>
+          <Button
+            icon="comment-text"
+            mode="outlined"
+            onPress={showModal}
+            style={styles.button}
+            contentStyle={styles.buttonInner}
+          >
+            Instructions
+          </Button>
+        </View>
+        <List.Section style={styles.ingredientList}>
+          <List.Accordion
+            title="Ingredients"
+            expanded={expanded}
+            onPress={handlePress}
+          >
+            {getIngredientList()}
+          </List.Accordion>
+        </List.Section>
+      </SafeAreaView>
+    </Provider>
   );
 };
 
 const styles = StyleSheet.create({
-  background: {
-    width: "100%",
-    height: "100%",
-    resizeMode: "contain",
-  },
   container: {
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
   },
   header: {
     flexDirection: "column",
@@ -83,7 +124,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 40,
     textShadowColor: "grey",
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : "0",
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : "2",
+    paddingBottom: 3,
   },
   center: {
     paddingTop: 5,
@@ -97,14 +139,13 @@ const styles = StyleSheet.create({
     width: 350,
     alignItems: "center",
     justifyContent: "center",
-    elevation: 4,
+    elevation: 6,
   },
   instructions: {
-    paddingTop: 8,
-    justifyContent: "flex-end",
-    flex: 1,
+    padding: 20,
     fontSize: 24,
     color: "black",
+    backgroundColor: "white",
   },
   ingredientList: {
     backgroundColor: "#fff",
@@ -112,6 +153,14 @@ const styles = StyleSheet.create({
   footer: {
     flex: 1,
     flexDirection: "column-reverse",
+  },
+  button: {
+    justifyContent: "flex-end",
+  },
+  buttonInner: {
+    width: "100%",
+    margin: 8,
+    fontSize: 34,
   },
 });
 

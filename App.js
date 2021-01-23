@@ -84,6 +84,7 @@ export default function App() {
             ingredients={drinkState.ingredients}
             instructions={drinkState.instructions}
             glass={drinkState.glass}
+            getDrink={getRandomDrink}
           />
         )}
         <StatusBar style="auto" />
