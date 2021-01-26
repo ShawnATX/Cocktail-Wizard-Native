@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  Alert,
   Platform,
   View,
   SafeAreaView,
@@ -41,6 +42,7 @@ const DrinkCard = (props) => {
         key={i}
         title={ingredient.ingredient}
         description={ingredient.measurement}
+        style={styles.listItem}
       />
     ));
     return ingredientList;
@@ -70,23 +72,26 @@ const DrinkCard = (props) => {
             }
           }}
         >
-          <View>
+          <View style={styles.imageContainer}>
             <DrinkImage image={{ image }} getDrink={getDrink} />
           </View>
         </FlingGestureHandler>
-        <Button
-          icon="comment-text"
-          mode="outlined"
-          onPress={showModal}
-          style={styles.button}
-          contentStyle={styles.buttonInner}
-        >
-          Instructions
-        </Button>
+        <View style={styles.buttonContainer}>
+          <Button
+            icon="comment-text"
+            mode="outlined"
+            onPress={showModal}
+            style={styles.button}
+            contentStyle={styles.buttonInner}
+          >
+            Instructions
+          </Button>
+        </View>
       </SafeAreaView>
       <List.Section style={styles.ingredientList}>
         <List.Accordion
           title="Ingredients"
+          titleStyle={styles.listTitle}
           expanded={expanded}
           onPress={handlePress}
         >
@@ -105,10 +110,10 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
   },
   header: {
-    flexDirection: "column",
     textAlign: "center",
-    justifyContent: "flex-start",
+    justifyContent: "center",
     backgroundColor: "white",
+    flex: 1,
     paddingTop: Platform.OS === "android" ? 0 : 6,
   },
   heading: {
@@ -116,24 +121,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     color: "black",
     fontWeight: "bold",
-    fontSize: 40,
+    fontSize: 42,
     textShadowColor: "grey",
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 10,
     paddingBottom: 5,
   },
-  center: {
-    paddingTop: 5,
-    flex: 1,
-    justifyContent: "flex-end",
-    flexDirection: "column-reverse",
-  },
-  surface: {
-    padding: 6,
-    height: 350,
-    width: 350,
-    alignItems: "center",
-    justifyContent: "center",
-    elevation: 6,
+  imageContainer: {
+    flex: 2,
   },
   instructions: {
     padding: 20,
@@ -141,21 +135,40 @@ const styles = StyleSheet.create({
     color: "black",
     backgroundColor: "white",
   },
-  ingredientList: {
-    backgroundColor: "#fff",
-  },
-  footer: {
+  buttonContainer: {
     flex: 1,
-    flexDirection: "column-reverse",
+    alignItems: "stretch",
+    justifyContent: "space-around",
   },
   button: {
     paddingTop: 4,
-    justifyContent: "flex-end",
+    color: "black",
   },
   buttonInner: {
     width: "100%",
     margin: 8,
     fontSize: 34,
+  },
+  ingredientList: {
+    backgroundColor: "#fff",
+    position: "absolute",
+    bottom: 0,
+    width: "85%",
+    right: 1,
+    justifyContent: "center",
+    alignContent: "center",
+  },
+  listItem: {
+    marginBottom: 0,
+    marginTop: 0,
+    paddingTop: 1,
+    paddingBottom: 0,
+  },
+  listTitle: {
+    alignContent: "center",
+  },
+  footer: {
+    flexDirection: "column-reverse",
   },
 });
 

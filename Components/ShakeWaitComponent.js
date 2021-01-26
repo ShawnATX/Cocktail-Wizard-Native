@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Animated, Easing, Image, StyleSheet } from "react-native";
+import { Animated, Easing } from "react-native";
 import ShakerImage from "../assets/cocktail_shaker.png";
 
 const ShakeWait = () => {
@@ -10,13 +10,13 @@ const ShakeWait = () => {
       Animated.sequence([
         Animated.timing(shakeAni, {
           toValue: 1,
-          duration: 350,
+          duration: 320,
           easing: Easing.sin,
           useNativeDriver: true,
         }),
         Animated.timing(shakeAni, {
           toValue: -1,
-          duration: 350,
+          duration: 320,
           easing: Easing.sin,
           useNativeDriver: true,
         }),
@@ -41,7 +41,5 @@ const ShakeWait = () => {
     />
   );
 };
-
-const styles = StyleSheet.create({});
 
 export default ShakeWait;
