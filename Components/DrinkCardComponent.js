@@ -122,16 +122,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     color: "black",
     fontWeight: "bold",
-    fontSize: 40,
+    fontSize: 42,
     textShadowColor: "grey",
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 10,
     paddingBottom: 5,
-  },
-  center: {
-    paddingTop: 5,
-    flex: 1,
-    justifyContent: "flex-end",
-    flexDirection: "column-reverse",
   },
   imageContainer: {
     flex: 2,
@@ -142,8 +136,28 @@ const styles = StyleSheet.create({
     color: "black",
     backgroundColor: "white",
   },
+  buttonContainer: {
+    flex: 1,
+    alignItems: "stretch",
+    justifyContent: "space-around",
+  },
+  button: {
+    paddingTop: 4,
+    color: "black",
+  },
+  buttonInner: {
+    width: "100%",
+    margin: 8,
+    fontSize: 34,
+  },
   ingredientList: {
     backgroundColor: "#fff",
+    position: "absolute",
+    bottom: 0,
+    width: "85%",
+    right: 1,
+    justifyContent: "center",
+    alignContent: "center",
   },
   listItem: {
     marginBottom: 0,
@@ -156,21 +170,6 @@ const styles = StyleSheet.create({
   },
   footer: {
     flexDirection: "column-reverse",
-  },
-  buttonContainer: {
-    flex: 1,
-    justifyContent: "flex-end",
-    flexDirection: "column-reverse",
-    alignItems: "stretch",
-  },
-  button: {
-    paddingTop: 4,
-    color: "black",
-  },
-  buttonInner: {
-    width: "100%",
-    margin: 8,
-    fontSize: 34,
   },
 });
 
