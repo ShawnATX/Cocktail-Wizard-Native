@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   Alert,
-  Image,
   Platform,
   View,
   SafeAreaView,
@@ -12,7 +11,6 @@ import {
   List,
   Paragraph,
   Title,
-  Surface,
   Modal,
   Text,
   Portal,
@@ -45,6 +43,7 @@ const DrinkCard = (props) => {
         key={i}
         title={ingredient.ingredient}
         description={ingredient.measurement}
+        style={styles.listItem}
       />
     ));
     return ingredientList;
@@ -74,23 +73,26 @@ const DrinkCard = (props) => {
             }
           }}
         >
-          <View>
+          <View style={styles.imageContainer}>
             <DrinkImage image={{ image }} getDrink={getDrink} />
           </View>
         </FlingGestureHandler>
-        <Button
-          icon="comment-text"
-          mode="outlined"
-          onPress={showModal}
-          style={styles.button}
-          contentStyle={styles.buttonInner}
-        >
-          Instructions
-        </Button>
+        <View style={styles.buttonContainer}>
+          <Button
+            icon="comment-text"
+            mode="outlined"
+            onPress={showModal}
+            style={styles.button}
+            contentStyle={styles.buttonInner}
+          >
+            Instructions
+          </Button>
+        </View>
       </SafeAreaView>
       <List.Section style={styles.ingredientList}>
         <List.Accordion
           title="Ingredients"
+          titleStyle={styles.listTitle}
           expanded={expanded}
           onPress={handlePress}
         >
@@ -109,10 +111,10 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
   },
   header: {
-    flexDirection: "column",
     textAlign: "center",
-    justifyContent: "flex-start",
+    justifyContent: "center",
     backgroundColor: "white",
+    flex: 1,
     paddingTop: Platform.OS === "android" ? 0 : 6,
   },
   heading: {
@@ -131,13 +133,8 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     flexDirection: "column-reverse",
   },
-  surface: {
-    padding: 6,
-    height: 350,
-    width: 350,
-    alignItems: "center",
-    justifyContent: "center",
-    elevation: 6,
+  imageContainer: {
+    flex: 2,
   },
   instructions: {
     padding: 20,
@@ -148,13 +145,27 @@ const styles = StyleSheet.create({
   ingredientList: {
     backgroundColor: "#fff",
   },
+  listItem: {
+    marginBottom: 0,
+    marginTop: 0,
+    paddingTop: 1,
+    paddingBottom: 0,
+  },
+  listTitle: {
+    alignContent: "center",
+  },
   footer: {
-    flex: 1,
     flexDirection: "column-reverse",
+  },
+  buttonContainer: {
+    flex: 1,
+    justifyContent: "flex-end",
+    flexDirection: "column-reverse",
+    alignItems: "stretch",
   },
   button: {
     paddingTop: 4,
-    justifyContent: "flex-end",
+    color: "black",
   },
   buttonInner: {
     width: "100%",
