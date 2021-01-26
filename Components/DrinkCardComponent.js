@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import {
-  Alert,
-  Image,
   Platform,
   View,
   SafeAreaView,
@@ -12,9 +10,7 @@ import {
   List,
   Paragraph,
   Title,
-  Surface,
   Modal,
-  Text,
   Portal,
   Button,
   Provider,
