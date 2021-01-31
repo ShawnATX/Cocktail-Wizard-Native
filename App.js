@@ -1,9 +1,13 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
-import { Provider as PaperProvider } from "react-native-paper";
+import {
+  Provider as PaperProvider,
+  DarkTheme,
+  DefaultTheme,
+} from "react-native-paper";
 import DrinkCard from "./Components/DrinkCardComponent";
 import ShakeWait from "./Components/ShakeWaitComponent";
+import CustomTheme from "./Styles/Theme";
 
 export default function App() {
   const [isLoading, setLoading] = useState(false);
@@ -17,11 +21,18 @@ export default function App() {
     glass: "",
   });
 
+  const theme = {
+    ...DefaultTheme,
+    colors: {
+      ...CustomTheme.colors,
+    },
+  };
+
   let randomCocktailURL =
     "https://www.thecocktaildb.com/api/json/v1/1/random.php?api-key=1";
-
   useEffect(() => {
     getRandomDrink();
+    console.log(theme);
   }, []);
 
   function setNotLoading() {
@@ -73,7 +84,7 @@ export default function App() {
   }
 
   return (
-    <PaperProvider>
+    <PaperProvider theme={theme}>
       <View style={styles.container}>
         {isLoading ? (
           <ShakeWait />
@@ -87,7 +98,6 @@ export default function App() {
             getDrink={getRandomDrink}
           />
         )}
-        <StatusBar style="auto" />
       </View>
     </PaperProvider>
   );
@@ -97,7 +107,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
   },

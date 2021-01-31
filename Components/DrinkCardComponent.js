@@ -105,24 +105,20 @@ const DrinkCard = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "flex-start",
   },
   header: {
     textAlign: "center",
     justifyContent: "center",
-    backgroundColor: "white",
     flex: 1,
     paddingTop: Platform.OS === "android" ? 0 : 6,
   },
   heading: {
     textAlign: "center",
     justifyContent: "center",
-    color: "black",
     fontWeight: "bold",
     fontSize: 42,
-    textShadowColor: "grey",
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 10,
     paddingBottom: 5,
   },
@@ -132,8 +128,6 @@ const styles = StyleSheet.create({
   instructions: {
     padding: 20,
     fontSize: 24,
-    color: "black",
-    backgroundColor: "white",
   },
   buttonContainer: {
     flex: 1,
@@ -142,7 +136,6 @@ const styles = StyleSheet.create({
   },
   button: {
     paddingTop: 4,
-    color: "black",
   },
   buttonInner: {
     width: "100%",
@@ -150,7 +143,6 @@ const styles = StyleSheet.create({
     fontSize: 34,
   },
   ingredientList: {
-    backgroundColor: "#fff",
     position: "absolute",
     bottom: 0,
     width: "85%",
