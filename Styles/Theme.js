@@ -2,13 +2,16 @@ const CustomTheme = {
   dark: false,
   mode: "adaptive",
   roundness: 1,
+  animation: {
+    scale: 1,
+  },
   colors: {
     primary: "#EEE5E5",
     accent: "#19647E",
     background: "#37392E",
     surface: "#19647E",
     onSurface: "#19647E",
-    text: "blue",
+    text: "#37392E",
     disabled: "rgba(0, 0, 0, 0.26)",
     placeholder: "rgba(0, 0, 0, 0.54)",
     backdrop: "rgba(0, 0, 0, 0.5)",
