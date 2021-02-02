@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { Animated, Easing } from "react-native";
-import ShakerImage from "../assets/cocktail_shaker.png";
+import ShakerImage from "../../assets/cocktail_shaker.png";
 
 const ShakeWait = () => {
   const shakeAni = useRef(new Animated.Value(-1)).current;

@@ -1,9 +1,9 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, SafeAreaView } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
-import DrinkCard from "./Components/DrinkCardComponent";
-import ShakeWait from "./Components/ShakeWaitComponent";
+import DrinkCard from "./src/Components/DrinkCardComponent";
+import ShakeWait from "./src/Components/ShakeWaitComponent";
 
 export default function App() {
   const [isLoading, setLoading] = useState(false);
@@ -27,7 +27,7 @@ export default function App() {
   function setNotLoading() {
     setTimeout(() => {
       setLoading(false);
-    }, 1100);
+    }, 1111);
   }
 
   //get random cocktail, fires on load with useEffect
@@ -74,7 +74,7 @@ export default function App() {
 
   return (
     <PaperProvider>
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         {isLoading ? (
           <ShakeWait />
         ) : (
@@ -88,7 +88,7 @@ export default function App() {
           />
         )}
         <StatusBar style="auto" />
-      </View>
+      </SafeAreaView>
     </PaperProvider>
   );
 }

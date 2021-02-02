@@ -55,6 +55,7 @@ const DrinkCard = (props) => {
           visible={modalVisible}
           onDismiss={hideModal}
           contentContainerStyle={styles.instructions}
+          style={styles.modal}
         >
           <Paragraph style={styles.instructions}>{instructions}</Paragraph>
         </Modal>
@@ -129,10 +130,13 @@ const styles = StyleSheet.create({
   imageContainer: {
     flex: 2,
   },
+  modal: {
+    backgroundColor: "white",
+  },
   instructions: {
     padding: 20,
     fontSize: 24,
-    color: "black",
+    color: "white",
     backgroundColor: "white",
   },
   buttonContainer: {
