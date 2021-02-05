@@ -106,24 +106,24 @@ const DrinkCard = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    // backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "flex-start",
   },
   header: {
     textAlign: "center",
     justifyContent: "center",
-    backgroundColor: "white",
+    // backgroundColor: "white",
     flex: 1,
     paddingTop: Platform.OS === "android" ? 0 : 6,
   },
   heading: {
     textAlign: "center",
     justifyContent: "center",
-    color: "black",
+    // color: "black",
     fontWeight: "bold",
     fontSize: 42,
-    textShadowColor: "grey",
+    // textShadowColor: "grey",
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 10,
     paddingBottom: 5,
   },
@@ -131,13 +131,13 @@ const styles = StyleSheet.create({
     flex: 2,
   },
   modal: {
-    backgroundColor: "white",
+    // backgroundColor: "white",
   },
   instructions: {
     padding: 20,
     fontSize: 24,
-    color: "white",
-    backgroundColor: "white",
+    // color: "black",
+    // backgroundColor: "white",
   },
   buttonContainer: {
     flex: 1,
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
   },
   button: {
     paddingTop: 4,
-    color: "black",
+    // color: "black",
   },
   buttonInner: {
     width: "100%",
@@ -154,11 +154,11 @@ const styles = StyleSheet.create({
     fontSize: 34,
   },
   ingredientList: {
-    backgroundColor: "#fff",
+    // backgroundColor: "#fff",
     position: "absolute",
     bottom: 0,
-    width: "85%",
-    right: 1,
+    width: "95%",
+    right: 0,
     justifyContent: "center",
     alignContent: "center",
   },
