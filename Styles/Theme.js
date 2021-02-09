@@ -1,27 +1,56 @@
-const CustomTheme = {
-  dark: false,
-  mode: "adaptive",
-  roundness: 1,
-  animation: {
-    scale: 1,
+const Themes = {
+  CustomTheme: {
+    dark: false,
+    mode: "adaptive",
+    roundness: 1,
+    animation: {
+      scale: 1,
+    },
+    colors: {
+      primary: "#EEE5E5",
+      accent: "#DADAD2",
+      background: "#37392E",
+      surface: "#19647E",
+      onSurface: "#19647E",
+      text: "#EEE5E5",
+      disabled: "rgba(0, 0, 0, 0.26)",
+      placeholder: "rgba(0, 0, 0, 0.54)",
+      backdrop: "rgba(0, 0, 0, 0.5)",
+      notification: "#f50057",
+    },
+    fonts: {
+      regular: "",
+      medium: "",
+      light: "",
+      thin: "",
+    },
   },
-  colors: {
-    primary: "#EEE5E5",
-    accent: "#19647E",
-    background: "#37392E",
-    surface: "#19647E",
-    onSurface: "#19647E",
-    text: "#37392E",
-    disabled: "rgba(0, 0, 0, 0.26)",
-    placeholder: "rgba(0, 0, 0, 0.54)",
-    backdrop: "rgba(0, 0, 0, 0.5)",
-    notification: "#f50057",
-  },
-  fonts: {
-    regular: "",
-    medium: "",
-    light: "",
-    thin: "",
+
+  CustomDarkTheme: {
+    dark: true,
+    mode: "adaptive",
+    roundness: 4,
+    animation: {
+      scale: 1,
+    },
+    colors: {
+      primary: "#EEE5E5",
+      accent: "#C8C8BC",
+      background: "#0B0B09",
+      surface: "#37392E",
+      onSurface: "#19647E",
+      text: "#DADAD2",
+      disabled: "rgba(0, 0, 0, 0.26)",
+      placeholder: "rgba(0, 0, 0, 0.54)",
+      backdrop: "rgba(0, 0, 0, 0.5)",
+      notification: "#f50057",
+    },
+    fonts: {
+      regular: "",
+      medium: "",
+      light: "",
+      thin: "",
+    },
   },
 };
 
@@ -45,4 +74,4 @@ const CustomTheme = {
 // animation (object)
 // scale - scale for all animations
 
-export default CustomTheme;
+export default Themes;

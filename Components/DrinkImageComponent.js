@@ -4,6 +4,19 @@ import { Surface } from "react-native-paper";
 
 const DrinkImage = (props) => {
   const { image } = props;
+  const { colors } = props;
+
+  const styles = StyleSheet.create({
+    surface: {
+      padding: 8,
+      height: 350,
+      width: 350,
+      alignItems: "center",
+      justifyContent: "center",
+      elevation: 8,
+      backgroundColor: colors.surface,
+    },
+  });
 
   return (
     <Surface style={styles.surface}>
@@ -14,18 +27,5 @@ const DrinkImage = (props) => {
     </Surface>
   );
 };
-
-const styles = StyleSheet.create({
-  surface: {
-    padding: 6,
-    height: 350,
-    width: 350,
-    alignItems: "center",
-    justifyContent: "center",
-    elevation: 6,
-    paddingBottom: 4,
-    backgroundColor: "#28AFB0",
-  },
-});
 
 export default DrinkImage;

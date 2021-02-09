@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
-import {
-  Provider as PaperProvider,
-  DarkTheme,
-  DefaultTheme,
-} from "react-native-paper";
+import { Provider as PaperProvider } from "react-native-paper";
 import DrinkCard from "./Components/DrinkCardComponent";
 import ShakeWait from "./Components/ShakeWaitComponent";
-import CustomTheme from "./Styles/Theme";
+import Themes from "./Styles/Theme";
 
 export default function App() {
   const [isLoading, setLoading] = useState(false);
@@ -22,10 +18,7 @@ export default function App() {
   });
 
   const theme = {
-    ...DefaultTheme,
-    colors: {
-      ...CustomTheme.colors,
-    },
+    ...Themes.CustomDarkTheme,
   };
 
   let randomCocktailURL =
@@ -85,30 +78,19 @@ export default function App() {
 
   return (
     <PaperProvider theme={theme}>
-      <View style={styles.container}>
-        {isLoading ? (
-          <ShakeWait />
-        ) : (
-          <DrinkCard
-            image={drinkState.image}
-            drinkName={drinkState.drinkName}
-            ingredients={drinkState.ingredients}
-            instructions={drinkState.instructions}
-            glass={drinkState.glass}
-            getDrink={getRandomDrink}
-          />
-        )}
-      </View>
+      {isLoading ? (
+        <ShakeWait />
+      ) : (
+        <DrinkCard
+          image={drinkState.image}
+          drinkName={drinkState.drinkName}
+          ingredients={drinkState.ingredients}
+          instructions={drinkState.instructions}
+          glass={drinkState.glass}
+          getDrink={getRandomDrink}
+          theme={theme}
+        />
+      )}
     </PaperProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#0B0B09",
-  },
-});

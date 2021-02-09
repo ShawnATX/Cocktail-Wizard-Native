@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Animated, Easing } from "react-native";
+import { Animated, Easing, SafeAreaView } from "react-native";
 import ShakerImage from "../assets/cocktail_shaker.png";
 
 const ShakeWait = () => {
@@ -30,15 +30,18 @@ const ShakeWait = () => {
   });
 
   return (
-    <Animated.Image
-      source={ShakerImage}
-      style={{
-        width: "85%",
-        height: "85%",
-        resizeMode: "contain",
-        transform: [{ rotate: spin }],
-      }}
-    />
+    <SafeAreaView style={{ backgroundColor: "#0B0B09", height: "100%" }}>
+      <Animated.Image
+        source={ShakerImage}
+        style={{
+          width: "85%",
+          height: "85%",
+          resizeMode: "contain",
+          transform: [{ rotate: spin }],
+          backgroundColor: "#0B0B09",
+        }}
+      />
+    </SafeAreaView>
   );
 };
 

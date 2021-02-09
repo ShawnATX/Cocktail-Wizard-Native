@@ -24,7 +24,17 @@ import {
 import DrinkImage from "./DrinkImageComponent";
 
 const DrinkCard = (props) => {
-  const { drinkName, id, ingredients, instructions, image, glass } = props;
+  const {
+    drinkName,
+    id,
+    ingredients,
+    instructions,
+    image,
+    glass,
+    theme,
+  } = props;
+
+  const { colors } = theme;
 
   const { getDrink } = props;
 
@@ -36,6 +46,84 @@ const DrinkCard = (props) => {
   const showModal = () => setModalVisible(true);
   const hideModal = () => setModalVisible(false);
 
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: colors.background,
+      alignItems: "center",
+      justifyContent: "flex-start",
+    },
+    header: {
+      textAlign: "center",
+      justifyContent: "center",
+      backgroundColor: colors.background,
+      flex: 1,
+      paddingTop: Platform.OS === "android" ? 0 : 6,
+    },
+    heading: {
+      textAlign: "center",
+      justifyContent: "center",
+      color: colors.text,
+      fontWeight: "bold",
+      fontSize: 42,
+      paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 10,
+      paddingBottom: 5,
+    },
+    imageContainer: {
+      flex: 2,
+      color: colors.surface,
+    },
+    instructions: {
+      padding: 20,
+      fontSize: 24,
+      color: colors.text,
+      backgroundColor: colors.surface,
+    },
+    buttonContainer: {
+      flex: 1,
+      alignItems: "stretch",
+      justifyContent: "space-around",
+    },
+    button: {
+      paddingTop: 4,
+      color: colors.accent,
+    },
+    buttonInner: {
+      flexDirection: "row-reverse",
+      width: "100%",
+      margin: 8,
+      fontSize: 34,
+      color: colors.surface,
+    },
+    ingredientList: {
+      backgroundColor: "#0A2933",
+      position: "absolute",
+      bottom: 0,
+      width: "100%",
+      justifyContent: "center",
+      alignContent: "center",
+      color: colors.text,
+    },
+    listItem: {
+      marginBottom: 0,
+      marginTop: 0,
+      paddingTop: 1,
+      paddingBottom: 0,
+      backgroundColor: "#0D3644",
+    },
+    listTitle: {
+      alignContent: "center",
+      color: colors.text,
+    },
+    listText: {
+      alignContent: "center",
+      color: colors.accent,
+    },
+    footer: {
+      flexDirection: "column-reverse",
+    },
+  });
+
   function getIngredientList() {
     const ingredientList = ingredients.map((ingredient, i) => (
       <List.Item
@@ -43,6 +131,8 @@ const DrinkCard = (props) => {
         title={ingredient.ingredient}
         description={ingredient.measurement}
         style={styles.listItem}
+        titleStyle={styles.listTitle}
+        descriptionStyle={styles.listText}
       />
     ));
     return ingredientList;
@@ -59,119 +149,56 @@ const DrinkCard = (props) => {
           <Paragraph style={styles.instructions}>{instructions}</Paragraph>
         </Modal>
       </Portal>
-      <SafeAreaView style={styles.container}>
-        <View style={styles.header}>
-          <Title style={styles.heading}>{drinkName}</Title>
-        </View>
-        <FlingGestureHandler
-          direction={Directions.RIGHT | Directions.LEFT}
-          numberOfPointers={1}
-          onHandlerStateChange={({ nativeEvent }) => {
-            if (nativeEvent.state === State.ACTIVE) {
-              getDrink();
-            }
-          }}
-        >
-          <View style={styles.imageContainer}>
-            <DrinkImage image={{ image }} getDrink={getDrink} />
+      <View style={styles.container}>
+        <SafeAreaView>
+          <View style={styles.header}>
+            <Title style={styles.heading}>{drinkName}</Title>
           </View>
-        </FlingGestureHandler>
-        <View style={styles.buttonContainer}>
-          <Button
-            icon="comment-text"
-            mode="outlined"
-            onPress={showModal}
-            style={styles.button}
-            contentStyle={styles.buttonInner}
+          <FlingGestureHandler
+            direction={Directions.RIGHT | Directions.LEFT}
+            numberOfPointers={1}
+            onHandlerStateChange={({ nativeEvent }) => {
+              if (nativeEvent.state === State.ACTIVE) {
+                getDrink();
+              }
+            }}
           >
-            Instructions
-          </Button>
-        </View>
-      </SafeAreaView>
-      <List.Section style={styles.ingredientList}>
-        <List.Accordion
-          title="Ingredients"
-          titleStyle={styles.listTitle}
-          expanded={expanded}
-          onPress={handlePress}
-        >
-          {getIngredientList()}
-        </List.Accordion>
-      </List.Section>
+            <View style={styles.imageContainer}>
+              <DrinkImage
+                image={{ image }}
+                colors={{ colors }}
+                getDrink={getDrink}
+              />
+            </View>
+          </FlingGestureHandler>
+          <View style={styles.buttonContainer}>
+            <Button
+              raised
+              icon="comment-text"
+              mode="text"
+              onPress={showModal}
+              style={styles.button}
+              labelStyle={styles.button}
+              contentStyle={styles.buttonInner}
+              color={colors.accent}
+            >
+              Instructions
+            </Button>
+          </View>
+        </SafeAreaView>
+        <List.Section style={styles.ingredientList}>
+          <List.Accordion
+            title="Ingredients"
+            titleStyle={styles.listTitle}
+            expanded={expanded}
+            onPress={handlePress}
+          >
+            {getIngredientList()}
+          </List.Accordion>
+        </List.Section>
+      </View>
     </Provider>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#0B0B09",
-    alignItems: "center",
-    justifyContent: "flex-start",
-  },
-  header: {
-    textAlign: "center",
-    justifyContent: "center",
-    backgroundColor: "#0B0B09",
-    flex: 1,
-    paddingTop: Platform.OS === "android" ? 0 : 6,
-  },
-  heading: {
-    textAlign: "center",
-    justifyContent: "center",
-    color: "#37392E",
-    fontWeight: "bold",
-    fontSize: 42,
-    textShadowColor: "grey",
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 10,
-    paddingBottom: 5,
-  },
-  imageContainer: {
-    flex: 2,
-  },
-  instructions: {
-    padding: 20,
-    fontSize: 24,
-    color: "black",
-    backgroundColor: "#0B0B09",
-  },
-  buttonContainer: {
-    flex: 1,
-    alignItems: "stretch",
-    justifyContent: "space-around",
-  },
-  button: {
-    paddingTop: 4,
-    color: "#37392E",
-  },
-  buttonInner: {
-    width: "100%",
-    margin: 8,
-    fontSize: 34,
-    color: "black",
-  },
-  ingredientList: {
-    backgroundColor: "#28AFB0",
-    position: "absolute",
-    bottom: 0,
-    width: "85%",
-    right: 1,
-    justifyContent: "center",
-    alignContent: "center",
-  },
-  listItem: {
-    marginBottom: 0,
-    marginTop: 0,
-    paddingTop: 1,
-    paddingBottom: 0,
-    backgroundColor: "#28AFB0",
-  },
-  listTitle: {
-    alignContent: "center",
-  },
-  footer: {
-    flexDirection: "column-reverse",
-  },
-});
 
 export default DrinkCard;
