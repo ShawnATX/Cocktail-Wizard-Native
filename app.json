@@ -28,6 +28,7 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "description": ""
+    "description": "Cocktail Wizard is designed to help users find new and exciting drinks or cocktails from the CocktailDB API.\n",
+    "githubUrl": "https://github.com/ShawnATX/Cocktail-Wizard-Native"
   }
 }

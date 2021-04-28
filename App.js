@@ -29,7 +29,7 @@ export default function App() {
   function setNotLoading() {
     setTimeout(() => {
       setLoading(false);
-    }, 1500);
+    }, 1000);
   }
 
   //get random cocktail, fires on load with useEffect
