@@ -1,10 +1,10 @@
 import React, { useRef } from "react";
 import { Image, PanResponder, Animated } from "react-native";
-import Styles from "./Styles";
+import Styles from "../Styles/Styles";
 
 const DrinkImage = (props) => {
   const pan = useRef(new Animated.ValueXY()).current;
-  const { getDrink, image, colors } = props;
+  const { image, getDrink } = props;
 
   const panResponder = useRef(
     PanResponder.create({
@@ -38,24 +38,15 @@ const DrinkImage = (props) => {
     return [
       Styles.card,
       { position: "absolute" },
-      { left: -5 },
-      { top: -0 },
+      { left: 0 },
+      { top: 0 },
       {
-        transform: [
-          { translateX: pan.x },
-          { translateY: pan.y },
-          {
-            rotate: pan.x.interpolate({
-              inputRange: [-150, 0, 150],
-              outputRange: ["-20deg", "0deg", "20deg"],
-            }),
-          },
-        ],
+        transform: [{ translateX: pan.x }, { translateY: 0 }],
       },
       {
         opacity: pan.x.interpolate({
           inputRange: [-150, 0, 150],
-          outputRange: [0.6, 1, 0.6],
+          outputRange: [0.5, 1, 0.5],
         }),
       },
     ];

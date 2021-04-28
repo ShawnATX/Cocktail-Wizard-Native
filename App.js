@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import DrinkCard from "./Components/DrinkCardComponent";
 import ShakeWait from "./Components/ShakeWaitComponent";
@@ -25,13 +24,12 @@ export default function App() {
     "https://www.thecocktaildb.com/api/json/v1/1/random.php?api-key=1";
   useEffect(() => {
     getRandomDrink();
-    console.log(theme);
   }, []);
 
   function setNotLoading() {
     setTimeout(() => {
       setLoading(false);
-    }, 1100);
+    }, 1500);
   }
 
   //get random cocktail, fires on load with useEffect

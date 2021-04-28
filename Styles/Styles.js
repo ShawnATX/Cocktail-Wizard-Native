@@ -1,6 +1,6 @@
 import { Platform, StatusBar, StyleSheet, Dimensions } from "react-native";
 
-import Theme from "../Styles/Theme";
+import Theme from "./Theme";
 
 // const DIMENSIONS = Dimensions.get("window");
 const { colors } = Theme.CustomDarkTheme;

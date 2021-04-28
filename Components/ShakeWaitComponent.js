@@ -30,7 +30,15 @@ const ShakeWait = () => {
   });
 
   return (
-    <SafeAreaView style={{ backgroundColor: "#0B0B09", height: "100%" }}>
+    <SafeAreaView
+      style={{
+        backgroundColor: "#0B0B09",
+        height: "100%",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <Animated.Image
         source={ShakerImage}
         style={{
