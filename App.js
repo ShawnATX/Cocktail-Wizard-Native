@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import DrinkCard from "./Components/DrinkCardComponent";
 import ShakeWait from "./Components/ShakeWaitComponent";
@@ -31,7 +30,7 @@ export default function App() {
   function setNotLoading() {
     setTimeout(() => {
       setLoading(false);
-    }, 1100);
+    }, 1000);
   }
 
   //get random cocktail, fires on load with useEffect
