@@ -51,7 +51,7 @@ const DrinkCard = (props) => {
         </Modal>
       </Portal>
       <View style={Styles.container}>
-        <SafeAreaView>
+        <View>
           <View style={Styles.header}>
             <Title style={Styles.heading} numberOfLines={2}>
               {drinkName}
@@ -73,7 +73,7 @@ const DrinkCard = (props) => {
               Instructions
             </Button>
           </View>
-        </SafeAreaView>
+        </View>
         <List.Section style={Styles.ingredientList}>
           <List.Accordion
             title="Ingredients"
