@@ -24,7 +24,6 @@ export default function App() {
     "https://www.thecocktaildb.com/api/json/v1/1/random.php?api-key=1";
   useEffect(() => {
     getRandomDrink();
-    console.log(theme);
   }, []);
 
   function setNotLoading() {
