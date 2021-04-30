@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View } from "react-native";
+import { View, SafeAreaView } from "react-native";
 import {
   List,
   Paragraph,
@@ -50,29 +50,27 @@ const DrinkCard = (props) => {
           <Paragraph style={Styles.instructions}>{instructions}</Paragraph>
         </Modal>
       </Portal>
-      <View style={Styles.container}>
-        <View>
-          <View style={Styles.header}>
-            <Title style={Styles.heading} numberOfLines={2}>
-              {drinkName}
-            </Title>
-          </View>
-          <View style={Styles.imageContainer}>
-            <DrinkImage image={{ image }} getDrink={getDrink} />
-          </View>
-          <View style={Styles.buttonContainer}>
-            <Button
-              raised
-              icon="comment-text"
-              mode="text"
-              onPress={showModal}
-              style={Styles.button}
-              labelStyle={Styles.button}
-              contentStyle={Styles.buttonInner}
-            >
-              Instructions
-            </Button>
-          </View>
+      <SafeAreaView style={Styles.container}>
+        <View style={Styles.header}>
+          <Title style={Styles.heading} numberOfLines={2}>
+            {drinkName}
+          </Title>
+        </View>
+        <View style={Styles.imageContainer}>
+          <DrinkImage image={{ image }} getDrink={getDrink} />
+        </View>
+        <View style={Styles.buttonContainer}>
+          <Button
+            raised
+            icon="comment-text"
+            mode="text"
+            onPress={showModal}
+            style={Styles.button}
+            labelStyle={Styles.button}
+            contentStyle={Styles.buttonInner}
+          >
+            Instructions
+          </Button>
         </View>
         <List.Section style={Styles.ingredientList}>
           <List.Accordion
@@ -84,7 +82,7 @@ const DrinkCard = (props) => {
             {getIngredientList()}
           </List.Accordion>
         </List.Section>
-      </View>
+      </SafeAreaView>
     </Provider>
   );
 };

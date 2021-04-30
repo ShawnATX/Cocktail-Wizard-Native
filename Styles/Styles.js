@@ -6,26 +6,18 @@ import Theme from "./Theme";
 const { colors } = Theme.CustomDarkTheme;
 
 const Styles = StyleSheet.create({
-  card: {
-    height: 350,
-    width: 350,
-    borderWidth: 1,
-    borderColor: "lightgrey",
-    borderRadius: 8,
-    justifyContent: "center",
-    backgroundColor: "#FFF",
-    overflow: "hidden",
-  },
   container: {
     flex: 1,
-    backgroundColor: colors.background,
-    alignItems: "center",
+    flexDirection: "column",
     justifyContent: "flex-start",
+    alignItems: "stretch",
+    width: "100%",
+    backgroundColor: colors.background,
   },
   header: {
-    textAlign: "center",
     justifyContent: "center",
     backgroundColor: colors.background,
+    // width: "100%",
     flex: 1,
     paddingTop: Platform.OS === "android" ? 0 : 6,
   },
@@ -36,11 +28,22 @@ const Styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 42,
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 10,
-    paddingBottom: 5,
+    paddingBottom: 0,
   },
   imageContainer: {
     flex: 2,
     color: colors.surface,
+    // alignItems: "center",
+    // alignSelf: "center",
+  },
+  imageCard: {
+    // height: 350,
+    // width: 350,
+    borderWidth: 1,
+    borderColor: "lightgrey",
+    borderRadius: 8,
+    backgroundColor: "#FFF",
+    overflow: "hidden",
   },
   instructions: {
     padding: 20,

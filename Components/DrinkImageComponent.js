@@ -1,10 +1,20 @@
 import React, { useRef } from "react";
-import { Image, PanResponder, Animated } from "react-native";
+import {
+  Image,
+  PanResponder,
+  Animated,
+  useWindowDimensions,
+} from "react-native";
 import Styles from "../Styles/Styles";
 
 const DrinkImage = (props) => {
-  const pan = useRef(new Animated.ValueXY()).current;
   const { image, getDrink } = props;
+
+  //Getting device screen width to set the image size to 82%, and setting the left/right margins to 9%
+  const imageDimension = useWindowDimensions().width * 0.82;
+  const imageGutter = useWindowDimensions().width * 0.09;
+
+  const pan = useRef(new Animated.ValueXY()).current;
 
   const panResponder = useRef(
     PanResponder.create({
@@ -36,9 +46,11 @@ const DrinkImage = (props) => {
 
   const getImageStyle = () => {
     return [
-      Styles.card,
+      Styles.imageCard,
+      { height: imageDimension },
+      { width: imageDimension },
       { position: "absolute" },
-      { left: 0 },
+      { left: imageGutter },
       { top: 0 },
       {
         transform: [{ translateX: pan.x }, { translateY: 0 }],
@@ -46,7 +58,7 @@ const DrinkImage = (props) => {
       {
         opacity: pan.x.interpolate({
           inputRange: [-150, 0, 150],
-          outputRange: [0.5, 1, 0.5],
+          outputRange: [0.6, 1, 0.6],
         }),
       },
     ];
