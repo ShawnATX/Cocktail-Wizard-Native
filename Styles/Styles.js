@@ -1,8 +1,7 @@
-import { Platform, StatusBar, StyleSheet, Dimensions } from "react-native";
+import { Platform, StatusBar, StyleSheet } from "react-native";
 
 import Theme from "./Theme";
 
-// const DIMENSIONS = Dimensions.get("window");
 const { colors } = Theme.CustomDarkTheme;
 
 const Styles = StyleSheet.create({
@@ -17,7 +16,6 @@ const Styles = StyleSheet.create({
   header: {
     justifyContent: "center",
     backgroundColor: colors.background,
-    // width: "100%",
     flex: 1,
     paddingTop: Platform.OS === "android" ? 0 : 6,
   },
@@ -33,12 +31,9 @@ const Styles = StyleSheet.create({
   imageContainer: {
     flex: 2,
     color: colors.surface,
-    // alignItems: "center",
-    // alignSelf: "center",
   },
   imageCard: {
-    // height: 350,
-    // width: 350,
+    //height and width are being set by the component from device screen size
     borderWidth: 1,
     borderColor: "lightgrey",
     borderRadius: 8,
