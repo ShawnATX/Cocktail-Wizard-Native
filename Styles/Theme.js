@@ -35,11 +35,11 @@ const Themes = {
     },
     colors: {
       primary: "#EEE5E5",
-      accent: "#C8C8BC",
+      accent: "#585e8a",
       background: "#0B0B09",
       surface: "#37392E",
       onSurface: "#19647E",
-      text: "#DADAD2",
+      text: "#d1d1e6",
       disabled: "rgba(0, 0, 0, 0.26)",
       placeholder: "rgba(0, 0, 0, 0.54)",
       backdrop: "rgba(0, 0, 0, 0.5)",

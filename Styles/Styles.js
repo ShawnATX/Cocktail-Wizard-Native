@@ -53,7 +53,7 @@ const Styles = StyleSheet.create({
   },
   button: {
     paddingTop: 4,
-    color: colors.accent,
+    color: colors.text,
   },
   buttonInner: {
     flexDirection: "row-reverse",

@@ -38,6 +38,7 @@ const DrinkImage = (props) => {
         } else {
           Animated.spring(pan, {
             toValue: 0,
+            useNativeDriver: true,
           }).start();
         }
       },
@@ -67,7 +68,7 @@ const DrinkImage = (props) => {
   return (
     <Animated.View style={getImageStyle()} {...panResponder.panHandlers}>
       <Image
-        source={{ uri: image.image }}
+        source={image.image ? { uri: image.image } : null}
         style={{ width: "100%", height: "100%", resizeMode: "contain" }}
       />
     </Animated.View>
