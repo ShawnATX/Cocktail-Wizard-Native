@@ -55,7 +55,9 @@ export default function App() {
           glass: glass,
         });
       })
-      .finally(() => setNotLoading());
+      .finally(() => {
+        setNotLoading();
+      });
   }
 
   function buildIngredientsArray(drinkObj) {
